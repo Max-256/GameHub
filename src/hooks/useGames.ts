@@ -1,3 +1,4 @@
+import { Platforms } from "./usePlatforms";
 import { Genres } from "./useGenres";
 import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
@@ -14,7 +15,10 @@ interface FetchGamesResponse {
   id: number;
   results: Games[];
 }
-const useGames = (selectedGenre: Genres | null) => {
+const useGames = (
+  selectedGenre: Genres | null,
+  selectedPlatform: Platforms | null
+) => {
   const [games, setGames] = useState<Games[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -25,7 +29,10 @@ const useGames = (selectedGenre: Genres | null) => {
     setLoading(true);
     apiClient
       .get<FetchGamesResponse>("/games", {
-        params: { genres: selectedGenre?.id },
+        params: {
+          genres: selectedGenre?.id,
+          parent_platforms: selectedPlatform?.id,
+        },
       })
       .then((res) => {
         setLoading(false);
@@ -38,7 +45,7 @@ const useGames = (selectedGenre: Genres | null) => {
       });
 
     return controller.abort();
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
 
   return { games, error, isLoading };
 };
