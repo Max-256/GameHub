@@ -13,6 +13,7 @@ const App = () => {
   const [selectedPlatform, setSelectedPlatform] = useState<Platforms | null>(
     null
   );
+  const [sortOrder, setSortOrder] = useState<string>("");
 
   return (
     <Grid
@@ -43,12 +44,16 @@ const App = () => {
             selectedPlatform={selectedPlatform}
             onSelectPlatform={(platform) => setSelectedPlatform(platform)}
           />
-          <SortSelector />
+          <SortSelector
+            sortOrder={sortOrder}
+            onSelectOrder={(order) => setSortOrder(order)}
+          />
         </HStack>
 
         <GamesGrid
           selectedGenre={selectedGenre}
           selectedPlatform={selectedPlatform}
+          sortOrder={sortOrder}
         />
       </GridItem>
     </Grid>
