@@ -1,5 +1,3 @@
-import { Platforms } from "./usePlatforms";
-import { Genres } from "./useGenres";
 import { CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
@@ -10,6 +8,7 @@ export interface Games {
   name: string;
   background_image: string;
   metacritic: number;
+  rating_top: number;
 }
 
 interface FetchGamesResponse {
