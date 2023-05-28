@@ -821,7 +821,7 @@ export default [
       },
       {
         id: 6885,
-        slug: "pirates-3",
+        slug: "pirates-4",
         name: "Sid Meier's Pirates!",
         added: 2018,
       },
